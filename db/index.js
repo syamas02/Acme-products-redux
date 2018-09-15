@@ -2,7 +2,15 @@ const Sequelize = require('sequelize');
 const conn = new Sequelize(process.env.DATABASE_URL, { logging: false });
 
 const Products = conn.define('products', {
-  name: Sequelize.STRING,
+  name: {
+    type: Sequelize.STRING,
+    unique: true,
+    notNull: true,
+    validate: {
+      notEmpty: true,
+    },
+  },
+
   rating: Sequelize.INTEGER,
 });
 
