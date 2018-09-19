@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const PORT = process.env.port || 3000;
+const PORT = process.env.PORT;
 const path = require('path');
 const db = require('./db');
 const { Products } = db.models;
@@ -11,7 +11,7 @@ app.get('/', (req, res) => res.sendFile(path.join(__dirname, 'index.html')));
 
 db.syncAndSeed();
 app.listen(PORT, () => {
-  console.log(`App listenining to port ${PORT}`);
+  console.log(`App listening to port ${PORT}`);
 });
 
 app.get('/api/products', (req, res, next) => {
