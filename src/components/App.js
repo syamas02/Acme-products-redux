@@ -13,7 +13,6 @@ class App extends Component {
 
   render() {
     const { topProduct } = this.props;
-    const bool = true;
     const renderNav = () => <Nav />;
     const renderProductList = () => <ProductList />;
     const renderTopRatingProduct = () => (
