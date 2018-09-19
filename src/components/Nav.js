@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 const Nav = ({ products, topProduct }) => {
   return (
     <ul>
+      <h1> Acme Products </h1>
       <li>
         <Link to="/products">Products ({products.length}) </Link>
       </li>
