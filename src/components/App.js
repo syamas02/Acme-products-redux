@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import Nav from './Nav';
 import store, { loadProducts } from '../store';
-import { HashRouter as Router, Route } from 'react-router-dom';
+import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 import ProductList from './ProductList';
 import Product from './Product';
+import { connect } from 'react-redux';
 
 class App extends Component {
   componentDidMount() {
@@ -11,20 +12,31 @@ class App extends Component {
   }
 
   render() {
+    const { topProduct } = this.props;
+    const bool = true;
     const renderNav = () => <Nav />;
     const renderProductList = () => <ProductList />;
-    const renderProduct = () => <Product />;
+    const renderTopRatingProduct = () => (
+      <Product product={topProduct} top={true} />
+    );
 
     return (
       <Router>
         <div>
           <Route render={renderNav} />
-          <Route path="/products" render={renderProductList} />
-          <Route path="/products/:id" render={renderProduct} />
+          <Switch>
+            <Route path="/products/:id" render={renderTopRatingProduct} />
+            <Route path="/products" render={renderProductList} />
+          </Switch>
         </div>
       </Router>
     );
   }
 }
 
-export default App;
+const mapStateToProps = ({ topProduct }) => {
+  return {
+    topProduct,
+  };
+};
+export default connect(mapStateToProps)(App);

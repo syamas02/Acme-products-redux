@@ -1,24 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Product from './Product';
-import store, { createProduct } from '../store';
+import { createProduct } from '../store';
 import faker from 'faker';
 
-const ProductList = ({ products }) => (
+const ProductList = ({ products, create, topRatingProduct }) => (
   <ul>
-    <button
-      onClick={() =>
-        store.dispatch(
-          createProduct({
-            id: faker.random.number(1000),
-            name: faker.commerce.productName(),
-            rating: faker.random.number(30),
-          })
-        )
-      }
-    >
-      Create a product
-    </button>
+    <br />
+    <div>
+      <button onClick={() => create()}>Create a product</button>
+    </div>
+    <br />
     {products.map(product => (
       <Product key={product.id} product={product} />
     ))}
@@ -30,5 +22,20 @@ const mapStateToProps = ({ products }) => {
     products,
   };
 };
+const mapDispatchToProps = dispatch => {
+  return {
+    create: () =>
+      dispatch(
+        createProduct({
+          id: faker.random.number(1000),
+          name: faker.commerce.productName(),
+          rating: faker.random.number(30),
+        })
+      ),
+  };
+};
 
-export default connect(mapStateToProps)(ProductList);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ProductList);
