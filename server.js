@@ -34,3 +34,9 @@ app.delete('/api/products/:id', (req, res, next) => {
     })
     .catch(next);
 });
+app.get('/api/products/toprating', (req, res, next) => {
+  Products.max('rating')
+    .then(rating => Products.findOne({ where: { rating } }))
+    .then(product => res.send(product))
+    .catch(next);
+});
