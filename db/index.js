@@ -21,8 +21,8 @@ const syncAndSeed = () => {
       Promise.all([
         Products.create({ name: 'Shampoo', rating: 4 }),
         Products.create({ name: 'Soap', rating: 5 }),
-        Products.create({ name: 'Tootbrush', rating: 1 }),
-        Products.create({ name: 'Tootpaste', rating: 2 }),
+        Products.create({ name: 'Toothbrush', rating: 1 }),
+        Products.create({ name: 'Toothpaste', rating: 2 }),
       ])
     )
     .then(() => {
