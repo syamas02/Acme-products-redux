@@ -8,16 +8,19 @@ const Nav = ({ products }) => {
   const topRatedProdObj = topRatedProd[0];
 
   return (
-    <ul>
-      <li>
-        <Link to="/products">Products ({products.length}) </Link>
-      </li>
-      <li>
-        <Link to={topRatedProdObj ? `/products/${topRatedProdObj.id}` : ''}>
-          Top Rated ({topRatedProdObj ? topRatedProdObj.name : ''})
-        </Link>
-      </li>
-    </ul>
+    <div>
+      <h1> Acme products </h1>
+      <ul>
+        <li>
+          <Link to="/products">Products ({products.length}) </Link>
+        </li>
+        <li>
+          <Link to={topRatedProdObj ? `/products/${topRatedProdObj.id}` : ''}>
+            Top Rated ({topRatedProdObj ? topRatedProdObj.name : ''})
+          </Link>
+        </li>
+      </ul>
+    </div>
   );
 };
 
