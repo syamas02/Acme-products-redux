@@ -2,7 +2,11 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-const Nav = ({ products, topProduct }) => {
+const Nav = ({ products }) => {
+  const topRatedProd = products.slice(0);
+  topRatedProd.sort((a, b) => b.rating - a.rating);
+  const topRatedProdObj = topRatedProd[0];
+
   return (
     <div>
       <h1> Acme Products </h1>
@@ -11,8 +15,8 @@ const Nav = ({ products, topProduct }) => {
           <Link to="/products">Products ({products.length}) </Link>
         </li>
         <li>
-          <Link to={`/products/${topProduct.id}`}>
-            Top Rated ({topProduct.name})
+          <Link to={topRatedProdObj ? `/products/${topRatedProdObj.id}` : ''}>
+            Top Rated ({topRatedProdObj ? topRatedProdObj.name : ''})
           </Link>
         </li>
       </ul>

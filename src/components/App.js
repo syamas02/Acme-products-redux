@@ -12,11 +12,10 @@ class App extends Component {
   }
 
   render() {
-    const { topProduct } = this.props;
     const renderNav = () => <Nav />;
     const renderProductList = () => <ProductList />;
-    const renderTopRatingProduct = () => (
-      <Product product={topProduct} top={true} />
+    const renderTopRatingProduct = ({ match, history }) => (
+      <Product productId={Number(match.params.id)} history={history} />
     );
 
     return (
@@ -33,18 +32,12 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = ({ topProduct }) => {
-  return {
-    topProduct,
-  };
-};
-
 const mapDispatchToProps = dispatch => {
   return {
     init: () => dispatch(loadProducts()),
   };
 };
 export default connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
 )(App);

@@ -4,7 +4,7 @@ import Product from './Product';
 import { createProduct } from '../store';
 import faker from 'faker';
 
-const ProductList = ({ products, create, topRatingProduct }) => (
+const ProductList = ({ products, create }) => (
   <ul>
     <br />
     <div>
@@ -12,7 +12,7 @@ const ProductList = ({ products, create, topRatingProduct }) => (
     </div>
     <br />
     {products.map(product => (
-      <Product key={product.id} product={product} />
+      <Product key={product.id} productId={product.id} />
     ))}
   </ul>
 );

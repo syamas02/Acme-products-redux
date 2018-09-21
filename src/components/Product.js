@@ -2,20 +2,29 @@ import React from 'react';
 import { deleteProduct } from '../store';
 import { connect } from 'react-redux';
 
-const Product = ({ product, top = false, deleteProd }) => {
-  return top ? (
-    <div>
-      {product.name} &nbsp;
-      <button onClick={() => deleteProd(product)}>x</button>
-    </div>
-  ) : (
+const Product = ({ deleteProd, productId, products, history }) => {
+  const product = products.filter(prod => prod.id === productId);
+
+  return (
     <li>
-      {product.name} {product.rating} &nbsp;
-      <button onClick={() => deleteProd(product)}>x</button>
+      {product[0].name} {product[0].rating} &nbsp;
+      <button
+        onClick={() => {
+          if (history) history.push('/products');
+          return deleteProd(product[0]);
+        }}
+      >
+        x
+      </button>
     </li>
   );
 };
 
+const mapStateToProps = ({ products }) => {
+  return {
+    products,
+  };
+};
 const mapDispatchToProps = dispatch => {
   return {
     deleteProd: prod => dispatch(deleteProduct(prod)),
@@ -23,6 +32,6 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(Product);
