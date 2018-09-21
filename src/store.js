@@ -62,7 +62,6 @@ const createProduct = product => {
   return dispatch =>
     axios
       .post('/api/products', product)
-
       .then(() => dispatch(_createProduct(product)))
       .then(() => dispatch(topRatingProduct()));
 };
@@ -79,6 +78,8 @@ const productsReducer = (state = [], action) => {
     case CREATE_PRODUCT:
       state = [...state, action.product];
       break;
+    default:
+      return state;
   }
   return state;
 };
@@ -87,7 +88,10 @@ const ratingReducer = (state = {}, action) => {
   switch (action.type) {
     case TOP_RATING_PRODUCT: {
       state = action.product;
+      break;
     }
+    default:
+      return state;
   }
   return state;
 };

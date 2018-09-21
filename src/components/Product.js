@@ -1,18 +1,28 @@
 import React from 'react';
-import store, { deleteProduct } from '../store';
+import { deleteProduct } from '../store';
+import { connect } from 'react-redux';
 
-const Product = ({ product, top = false }) => {
+const Product = ({ product, top = false, deleteProd }) => {
   return top ? (
     <div>
       {product.name} &nbsp;
-      <button onClick={() => store.dispatch(deleteProduct(product))}>x</button>
+      <button onClick={() => deleteProd(product)}>x</button>
     </div>
   ) : (
     <li>
       {product.name} {product.rating} &nbsp;
-      <button onClick={() => store.dispatch(deleteProduct(product))}>x</button>
+      <button onClick={() => deleteProd(product)}>x</button>
     </li>
   );
 };
 
-export default Product;
+const mapDispatchToProps = dispatch => {
+  return {
+    deleteProd: prod => dispatch(deleteProduct(prod)),
+  };
+};
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(Product);

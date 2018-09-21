@@ -28,15 +28,16 @@ app.post('/api/products', (req, res, next) => {
 
 app.delete('/api/products/:id', (req, res, next) => {
   Products.findById(req.params.id)
-    .then(product => {
-      product.destroy();
-      res.sendStatus(204);
-    })
+    .then(product => product.destroy())
+    .then(() => res.sendStatus(204))
     .catch(next);
 });
+
 app.get('/api/products/toprating', (req, res, next) => {
   Products.max('rating')
     .then(rating => Products.findOne({ where: { rating } }))
     .then(product => res.send(product))
     .catch(next);
 });
+
+app.use((err, req, res, next) => res.status(500).send({ error: err.message }));

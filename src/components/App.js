@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Nav from './Nav';
-import store, { loadProducts } from '../store';
+import { loadProducts } from '../store';
 import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 import ProductList from './ProductList';
 import Product from './Product';
@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 
 class App extends Component {
   componentDidMount() {
-    store.dispatch(loadProducts());
+    this.props.init();
   }
 
   render() {
@@ -38,4 +38,13 @@ const mapStateToProps = ({ topProduct }) => {
     topProduct,
   };
 };
-export default connect(mapStateToProps)(App);
+
+const mapDispatchToProps = dispatch => {
+  return {
+    init: () => dispatch(loadProducts()),
+  };
+};
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App);

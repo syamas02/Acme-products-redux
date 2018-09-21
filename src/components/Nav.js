@@ -4,17 +4,19 @@ import { connect } from 'react-redux';
 
 const Nav = ({ products, topProduct }) => {
   return (
-    <ul>
+    <div>
       <h1> Acme Products </h1>
-      <li>
-        <Link to="/products">Products ({products.length}) </Link>
-      </li>
-      <li>
-        <Link to={`/products/${topProduct.id}`}>
-          Top Rated ({topProduct.name})
-        </Link>
-      </li>
-    </ul>
+      <ul>
+        <li>
+          <Link to="/products">Products ({products.length}) </Link>
+        </li>
+        <li>
+          <Link to={`/products/${topProduct.id}`}>
+            Top Rated ({topProduct.name})
+          </Link>
+        </li>
+      </ul>
+    </div>
   );
 };
 
